@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Inventory Manager</title>
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   
+    <style>
+        .container{
+            margin: 2vw auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <h1>List of Inventory</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Assets</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <tr>
+                        <td>Pizza</td>
+                        <td>118</td>
+                        <td>$1.99</td>
+                        <td>$234.82</td>
+                        <td>
+                            <a class="waves-effect waves-light btn blue" href = "edit.html">
+                            <i class="material-icons right">create</i>Edit
+                            </a>
+                            <a class="waves-effect waves-light btn red">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </a>
+                        </td>       
+                    </tr>
+    
+                    <tr>
+                        <td>Pasta</td>
+                        <td>180</td>
+                        <td>$10.99</td>
+                        <td>$1978.20</td>
+                        <td><a class="waves-effect waves-light btn blue" href = "edit.html"><i class="material-icons right">create</i>Edit</a>
+                            <a class="waves-effect waves-light btn red">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td>Garlic Knots</td>
+                        <td>114</td>
+                        <td>$4.99</td>
+                        <td>$568.86</td>
+                        <td><a class="waves-effect waves-light btn blue" href = "edit.html"><i class="material-icons right">create</i>Edit</a>
+                            <a class="waves-effect waves-light btn red">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <br> 
+    
+            <h1>Add Inventory:</h1>
+            <div class="row">
+                <div class="input-field">
+                    <label for="nameInput">Item Name:</label>
+                    <input type="text" name="name" id="nameInput" class="validate" data-length="50" required>
+                </div>
+             </div>
+    
+            <div class="row">
+                <div class="input-field">
+                    <label for="descriptionInput">Price ($):</label>
+                    <input type="text" name="description" id="descriptionInput" class="validate" data-length="10" required>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="input-field">
+                    <label for="quantityInput">Item Quantity:</label>
+                    <input type="number" name="quantity" id="quantityInput" class="validate" value=118 required>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="input-field">
+                    <label for="descriptionInput">Item Description:</label>
+                    <input type="text" name="description" id="descriptionInput" data-length="150">
+                </div>
+            </div>
+            
+            <button class="waves-effect waves-light btn orange">
+                <i class="material-icons right">add</i>
+                Add
+            </button>
+        </div>
+    </form>
+        
+</body>
+</html>
