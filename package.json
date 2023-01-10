@@ -1,0 +1,23 @@
+{
+  "name": "practice-prototype-web-apps",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maabar24/Practice-Prototype-Web-Apps.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maabar24/Practice-Prototype-Web-Apps/issues"
+  },
+  "homepage": "https://github.com/maabar24/Practice-Prototype-Web-Apps#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
