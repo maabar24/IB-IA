@@ -1,12 +1,14 @@
 //set up the server
 const express = require( "express" );
 const app = express();
-const port = 8080;
 const logger = require("morgan");
-const db = require("./db/db_connection")
+const helmet = require("helmet");
+const db = require("./db/db_pool")
+const port = process.env.PORT || 8080;
 app.set("views", __dirname + "/views")
 app.set('view engine', "ejs")
 app.use( express.urlencoded({ extended: false }) );
+app.use(helmet());
 
 // define middleware that logs all incoming requests
 app.use((req, res, next) => {
@@ -103,7 +105,7 @@ const update_item_sql = `
         price = ?
     WHERE
         id = ?
-` //still have to fix this button
+`
 app.post("/list/edit/:id", ( req, res ) => {
     db.execute(update_item_sql, [req.body.name, req.body.quantity, req.body.price, req.params.id], (error, results) => {
         if (error)
