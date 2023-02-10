@@ -31,16 +31,16 @@
                     <th>Item Name:</th>
                     <th>Price ($):</th>
                     <th>Quantity:</th>
-                    <th>Description:</th>
+                    <th>Total Assets:</th>
                 </tr>   
             </thead>
 
             <tbody>
                <tr>
-                    <td>Pizza</td>
-                    <td>$1.99</td>
-                    <td>118</td>
-                    <td>Pizza, a cheesy, saucy, traingly delicasy that can make anyone's day!</td>
+                    <td><%= item%></td>
+                    <td><%= price%></td>
+                    <td><%= quantity%></td>
+                    <td><%= quantity * price%></td>
                </tr>
             </tbody>
         </table>
@@ -51,14 +51,14 @@
             <a class="btn-large waves-effect waves-light purple left modal-trigger" href="#edit">
                 <i class="material-icons right">edit</i>Edit</a>
     
-            <button class="btn-large waves-effect waves-light red right">
+            <button class="btn-large waves-effect waves-light red right" href="/list/edit/<%=id %>/delete">
                 <i class="material-icons right">delete</i>Delete</button>
         </div>
     
         <div class="modal" id="edit">
 
             <div class="modal-content">
-                <form>
+                <form method="post" action="/list/edit/<%= id%>">
                     <h2>Edit Inventory:</h2>
                     <div class="row">
                         <div class="input-field col s6">
@@ -90,7 +90,7 @@
                     
                     <div class="modal-footer">
                         <button class="btn waves-effect waves-light " type="submit">
-                            <i class="material-icons right">send<!-- Change this--></i>
+                            <i class="material-icons right">send</i>
                             Continue
                         </button>
                         <button class="modal-close waves-effect waves-green btn-flat">Back</button>

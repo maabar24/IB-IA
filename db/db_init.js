@@ -12,7 +12,7 @@ const create_stuff_table_sql = `
         id INT NOT NULL AUTO_INCREMENT,
         item VARCHAR(45) NOT NULL,
         quantity INT NOT NULL,
-        description VARCHAR(150) NULL,
+        price DOUBLE NULL,
         PRIMARY KEY (id)
     );
 `
@@ -23,17 +23,16 @@ db.execute(create_stuff_table_sql);
 
 const insert_stuff_table_sql = `
     INSERT INTO stuff 
-        (item, quantity, description) 
+        (item, quantity, price) 
     VALUES 
         (?, ?, ?);
 `
-db.execute(insert_stuff_table_sql, ['Widgets', '5', 'Widgets are cool! You can do ... so many... different things... with them...']);
+db.execute(insert_stuff_table_sql, ['Pizza', '118', '1.99']);
 
-db.execute(insert_stuff_table_sql, ['Gizmos', '100', null]);
+db.execute(insert_stuff_table_sql, ['Pasta', '180', '10.99']);
 
-db.execute(insert_stuff_table_sql, ['Thingamajig', '12345', 'Not to be confused with a Thingamabob']);
+db.execute(insert_stuff_table_sql, ['Garlic Knots', '114', '4.99']);
 
-db.execute(insert_stuff_table_sql, ['Thingamabob', '54321', 'Not to be confused with a Thingamajig']);
 
 
 /**** Read the sample items inserted ****/
