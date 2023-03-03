@@ -17,8 +17,15 @@
 
              
 </head>
+
 <body>
     <div class="container">
+        <% if (isLoggedIn) { %>
+            <a class="blue btn" href="/logout">LOGOUT</a>
+        }
+        <% } else { %> 
+            <a class="blue btn" href="/login">LOGIN</a>
+        <% } %>
         <h1>Welcome!</h1>
         <h2>This website will help record inventory for Maanav's Pizza Parlor!</h2>
         <a class = "waves-effect waves-light btn" href="/list">
