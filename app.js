@@ -9,6 +9,8 @@ const db = require("./db/db_pool")
 const port = process.env.PORT || 8080;
 const { auth } = require('express-openid-connect');
 const { requiresAuth } = require('express-openid-connect');
+
+
 app.set("views", __dirname + "/views")
 app.set('view engine', "ejs")
 app.use(express.urlencoded({extended:false}));
@@ -21,8 +23,10 @@ app.use(helmet( {
     }
     }}
 ));
+
+
 const config = {
-    authRequired: false,
+    authRequired: true,
     auth0Logout: true,
     secret: process.env.AUTH0_SECRET,
     baseURL: process.env.AUTH0_BASE_URL,
@@ -33,7 +37,6 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
-
 // define middleware that logs all incoming requests
 app.use((req, res, next) => {
     app.use(logger("dev"));
@@ -41,6 +44,15 @@ app.use((req, res, next) => {
     app.use(express.static(__dirname + '/public'));    
     next();
 } );
+
+//define middleware that for each request, attaches auth info
+//to the response, usable by EJS at render
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.oidc.isAuthenticated()
+    res.locals.user = req.oidc.user;
+
+    next();
+})
 
 // req.isAuthenticated is provided from the auth router
 app.get('/authtest', (req, res) => {
@@ -54,16 +66,16 @@ app.get('/profile', requiresAuth(), (req, res) => {
 // define a route for the default home page
 app.get( "/", ( req, res ) => {
     //console.log(`${req.method} ${req.url}`);
-    res.render('index', {inLoggedIn : req.oidc.isAuthenticated(),
-        userName :req.oidc.name
+    res.render('index', {isLoggedIn : req.oidc.isAuthenticated(),
+        user : req.oidc.user
     });
 } );
 
-const read_stuff_all_sql = " SELECT id, item, quantity, price FROM stuff"
 
+const read_stuff_all_sql = " SELECT id, item, quantity, price FROM stuff WHERE userid = ?"
 // define a route for the stuff inventory page
 app.get( "/list", ( req, res ) => {
-    db.execute(read_stuff_all_sql, (error, results) => {
+    db.execute(read_stuff_all_sql, [req.oidc.user.email], (error, results) => {
         if (error) {
             res.status(500).send(error); //internal server error
         }
@@ -75,11 +87,11 @@ app.get( "/list", ( req, res ) => {
     //res.render("/views/list.html", results[0]);
 } );
 
-const read_item_sql = "SELECT id, item, quantity, price FROM stuff WHERE id = ?"
 
+const read_item_sql = "SELECT id, item, quantity, price FROM stuff WHERE id = ? AND userid = ?"
 // define a route for the item detail page
 app.get( "/list/edit/:id", ( req, res ) => {
-    db.execute(read_item_sql, [req.params.id], (error, results) => {
+    db.execute(read_item_sql, [req.params.id, req.oidc.user.email], (error, results) => {
         if (error) {
             res.status(500).send(error); //internal server error
         } 
@@ -102,9 +114,10 @@ const delete_item_sql = `
         stuff
     WHERE
         id = ?
-`
+        AND
+        userid = ?`
 app.get("/list/edit/:id/delete", ( req, res ) => {
-    db.execute(delete_item_sql, [req.params.id], (error, results) => {
+    db.execute(delete_item_sql, [req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
@@ -115,12 +128,11 @@ app.get("/list/edit/:id/delete", ( req, res ) => {
 
 const create_item_sql = `
     INSERT INTO stuff
-        (item, price, quantity)
+        (item, price, quantity, userid)
     VALUES
-        (?, ?, ?)
-`
+        (?, ?, ?, ?)`
 app.post("/list", ( req, res ) => {
-    db.execute(create_item_sql, [req.body.name, req.body.price, req.body.quantity], (error, results) => {
+    db.execute(create_item_sql, [req.body.name, req.body.price, req.body.quantity, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
@@ -140,9 +152,10 @@ const update_item_sql = `
         price = ?
     WHERE
         id = ?
-`
+        AND
+        userid = ?`
 app.post("/list/edit/:id", ( req, res ) => {
-    db.execute(update_item_sql, [req.body.name, req.body.quantity, req.body.price, req.params.id], (error, results) => {
+    db.execute(update_item_sql, [req.body.name, req.body.quantity, req.body.price, req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {

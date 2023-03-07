@@ -13,6 +13,7 @@ const create_stuff_table_sql = `
         item VARCHAR(45) NOT NULL,
         quantity INT NOT NULL,
         price DOUBLE NULL,
+        userid VARCHAR(50) NULL,
         PRIMARY KEY (id)
     );
 `

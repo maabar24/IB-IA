@@ -19,14 +19,43 @@
 </head>
 
 <body>
+
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Maanav's Pizza Parlor</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                        <li><a href="/logout" class="btn red">Logout</a></li>                        
+                    <% } else { %>
+                        <li><a href="/login" class="btn blue">Login</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <ul id="mobile-nav" class="sidenav">
+             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+             <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
+             <% if (isLoggedIn) { %>
+                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                <li><a href="/logout" class="btn red">Logout</a></li>                        
+            <% } else { %>
+                <li><a href="/login" class="btn blue">Login</a></li>
+            <% } %>
+        </ul>
+    </header>
+
     <div class="container">
         <% if (isLoggedIn) { %>
-            <a class="blue btn" href="/logout">LOGOUT</a>
-        }
+            <h1>Welcome <%=user.name%>!</h1>
         <% } else { %> 
             <a class="blue btn" href="/login">LOGIN</a>
+            <h1>Welcome!</h1>
         <% } %>
-        <h1>Welcome!</h1>
         <h2>This website will help record inventory for Maanav's Pizza Parlor!</h2>
         <a class = "waves-effect waves-light btn" href="/list">
             Get Started!
@@ -40,4 +69,9 @@
         <img src="/images/Pizza.jpg" width="250" height="250">
     </div> 
 </body>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
