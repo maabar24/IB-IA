@@ -13,6 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, options);
+    });
+    </script>
 </head>
 
 <body>
@@ -55,6 +62,9 @@
             <i class="material-icons left">arrow_back</i>Return
             </a>
 
+        <a class="btn-small waves-effect waves-light btn green right" href= "/categories"> <i
+            class="material-icons right">edit</i>Categories</a>
+
         <table class = "responsive-table">
             <thead>
                 <tr>
@@ -62,6 +72,7 @@
                     <th>Price ($):</th>
                     <th>Quantity:</th>
                     <th>Total Assets:</th>
+                    <th>Category:</th>
                 </tr>   
             </thead>
 
@@ -71,6 +82,7 @@
                     <td><%= price%></td>
                     <td><%= quantity%></td>
                     <td><%= quantity * price%></td>
+                    <td><%= categoryName %> </td>
                </tr>
             </tbody>
         </table>
@@ -80,6 +92,7 @@
         <div class="section" id="Edit+Delete Information">
             <a class="btn-large waves-effect waves-light purple left modal-trigger" href="#edit">
                 <i class="material-icons right">edit</i>Edit</a>
+
     
             <button class="btn-large waves-effect waves-light red right" href="/list/edit/<%=id %>/delete">
                 <i class="material-icons right">delete</i>Delete</button>
