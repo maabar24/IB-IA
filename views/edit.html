@@ -18,7 +18,7 @@
 <body>
     <div class = "container">
         <h1>
-            Pizza Inventory Editor
+            Ingredient Inventory Editor
         </h1>
 
         <a class="waves-effect waves-light btn blue" href = "/list">
@@ -31,16 +31,20 @@
                     <th>Item Name:</th>
                     <th>Price ($):</th>
                     <th>Quantity:</th>
+                    <th>Expire Date:</th>
+                    <th>Category:</th>
                     <th>Description:</th>
                 </tr>   
             </thead>
 
             <tbody>
                <tr>
-                    <td>Pizza</td>
-                    <td>$1.99</td>
-                    <td>118</td>
-                    <td>Pizza, a cheesy, saucy, traingly delicasy that can make anyone's day!</td>
+                    <td>Mozzarella</td>
+                    <td>$ 1.20</td>
+                    <td>60</td>
+                    <td>2023-11-12</td>
+                    <td>Cheese</td>
+                    <th>I hate mozz.</th>
                </tr>
             </tbody>
         </table>
@@ -80,7 +84,21 @@
                             <input type="number" name="quantity" id="quantityInput" value=118 required>
                         </div>
                     </div>
-    
+
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <label for="dateInput">Expire Date:</label>
+                            <input type="number" name="date" id="dateInput" data-length="10" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s3">
+                            <label for="categoryInput">Category:</label>
+                            <input type="number" name="category" id="categoryInput" data-length="10" required>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="input-field col s12">
                             <label for="descriptionInput">Item Description:</label>

@@ -3,49 +3,49 @@ const db = require("./db_connection");
 
 /**** Delete existing table, if any ****/
 
-const drop_stuff_table_sql = "DROP TABLE IF EXISTS `stuff`;"
+const drop_test_table_sql = "DROP TABLE IF EXISTS `test`;"
 
-db.execute(drop_stuff_table_sql);
+db.execute(drop_test_table_sql);
 
-const create_stuff_table_sql = `
-    CREATE TABLE stuff (
+const create_test_table_sql = `
+    CREATE TABLE test (
         id INT NOT NULL AUTO_INCREMENT,
         item VARCHAR(45) NOT NULL,
+        price DOUBLE NOT NULL,
         quantity INT NOT NULL,
         description VARCHAR(150) NULL,
         PRIMARY KEY (id)
     );
 `
-db.execute(create_stuff_table_sql);
+db.execute(create_test_table_sql);
 
 
 /**** Create some sample items ****/
 
-const insert_stuff_table_sql = `
-    INSERT INTO stuff 
-        (item, quantity, description) 
+const insert_test_table_sql = `
+    INSERT INTO test 
+        (item, price, quantity, description) 
     VALUES 
-        (?, ?, ?);
+        (?, ?, ?, ?);
 `
-db.execute(insert_stuff_table_sql, ['Widgets', '5', 'Widgets are cool! You can do ... so many... different things... with them...']);
+db.execute(insert_test_table_sql, ['Tomatoes', '.50', '30', 'I love tomatoes.' ]);
 
-db.execute(insert_stuff_table_sql, ['Gizmos', '100', null]);
+db.execute(insert_test_table_sql, ['Mozzarella', '1.20', '60', 'I hate mozz.' ]);
 
-db.execute(insert_stuff_table_sql, ['Thingamajig', '12345', 'Not to be confused with a Thingamabob']);
+db.execute(insert_test_table_sql, ['Flour', '1.50', '10', 'Flower is mid.' ]);
 
-db.execute(insert_stuff_table_sql, ['Thingamabob', '54321', 'Not to be confused with a Thingamajig']);
-
+db.execute(insert_test_table_sql, ['Garlic', '.25', '20', 'Garlic stinks.' ]);
 
 /**** Read the sample items inserted ****/
 
-const read_stuff_table_sql = "SELECT * FROM stuff";
+const read_test_table_sql = "SELECT * FROM test";
 
-db.execute(read_stuff_table_sql, 
+db.execute(read_test_table_sql, 
     (error, results) => {
         if (error) 
             throw error;
 
-        console.log("Table 'stuff' initialized with:")
+        console.log("Table 'test' initialized with:")
         console.log(results);
     }
 );

@@ -30,18 +30,22 @@
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th>Quantity</th>
                         <th>Price</th>
-                        <th>Total Assets</th>
+                        <th>Quantity</th>
+                        <th>Expire Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
     
                 <tbody>
                     <tr>
-                        <td>Pizza</td>
-                        <td>118</td>
-                        <td>$1.99</td>
-                        <td>$234.82</td>
+                        <td>Tomatoes</td>
+                        <td>$ .50</td>
+                        <td>30</td>
+                        <td>2023-12-12</td>
+                        <td>Sauce</td>
+                        <th>I love pizza.</th>
                         <td>
                             <a class="waves-effect waves-light btn blue" href = "/list/edit">
                             <i class="material-icons right">create</i>Edit
@@ -54,10 +58,12 @@
                     </tr>
     
                     <tr>
-                        <td>Pasta</td>
-                        <td>180</td>
-                        <td>$10.99</td>
-                        <td>$1978.20</td>
+                        <td>Mozzarella</td>
+                        <td>$ 1.20</td>
+                        <td>60</td>
+                        <td>2023-11-12</td>
+                        <td>Cheese</td>
+                        <th>I hate mozz.</th>
                         <td><a class="waves-effect waves-light btn blue" href = "/list/edit"><i class="material-icons right">create</i>Edit</a>
                             <a class="waves-effect waves-light btn red">
                                 <i class="material-icons right">delete</i>
@@ -67,10 +73,12 @@
                     </tr>
     
                     <tr>
-                        <td>Garlic Knots</td>
-                        <td>114</td>
-                        <td>$4.99</td>
-                        <td>$568.86</td>
+                        <td>Flour</td>
+                        <td>$ 1.50</td>
+                        <td>10</td>
+                        <td>2024-12-12</td>
+                        <td>Dough</td>
+                        <th>Flower is mid.</th>
                         <td><a class="waves-effect waves-light btn blue" href = "/list/edit"><i class="material-icons right">create</i>Edit</a>
                             <a class="waves-effect waves-light btn red">
                                 <i class="material-icons right">delete</i>
@@ -78,6 +86,22 @@
                             </a>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>Garlic</td>
+                        <td>$ .25</td>
+                        <td>20</td>
+                        <td>2024-1-12</td>
+                        <td>Sauce</td>
+                        <th>Garlic stinks.</th>
+                        <td><a class="waves-effect waves-light btn blue" href = "/list/edit"><i class="material-icons right">create</i>Edit</a>
+                            <a class="waves-effect waves-light btn red">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
     
@@ -102,6 +126,20 @@
                 <div class="input-field">
                     <label for="quantityInput">Item Quantity:</label>
                     <input type="number" name="quantity" id="quantityInput" class="validate" value=118 required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <label for="dateInput">Expire Date:</label>
+                    <input type="text" name="date" id="dateInput" class="validate" data-length="10" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <label for="categoryInput">Category:</label>
+                    <input type="text" name="category" id="categoryInput" class="validate" data-length="100" required>
                 </div>
             </div>
     
