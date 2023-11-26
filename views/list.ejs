@@ -32,32 +32,7 @@
 <body>
 
     <header>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo">Maanav's Pizza Parlor</a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul id="desktop-nav" class="right hide-on-med-and-down">
-                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-                    <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
-                    <% if (isLoggedIn) { %>
-                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                        <li><a href="/logout" class="btn red">Logout</a></li>                        
-                    <% } else { %>
-                        <li><a href="/login" class="btn blue">Login</a></li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-        <ul id="mobile-nav" class="sidenav">
-             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-             <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
-             <% if (isLoggedIn) { %>
-                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                <li><a href="/logout" class="btn red">Logout</a></li>                        
-            <% } else { %>
-                <li><a href="/login" class="btn blue">Login</a></li>
-            <% } %>
-        </ul>
+        <%- include('partials/navbar') %>
     </header>
 
     <div class="container">
@@ -67,27 +42,29 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Item Name:</th>
+                        <th>Ingredient Name:</th>
                         <th>Quantity:</th>
                         <th>Price ($):</th>
                         <th>Total Assets:</th>
-                        <th>Category:</th>
+                        <th>Categories:</th>
+                        <th>Description:</th>
                     </tr>   
                 </thead>
 
                 <tbody>
                     
-                    <% for (let i = 0; i < inventory.length; i++) { %>
+                    <% for (let i = 0; i < ingredient.length; i++) { %>
                         <tr>
-                            <td><%= inventory[i].item %></td>
-                            <td><%= inventory[i].quantity %></td>
-                            <td><%= inventory[i].price %></td>
-                            <td><%= inventory[i].quantity * inventory[i].price %></td>
-                            <td><%= inventory[i].categoryName %> </td>
+                            <td><%= ingredient[i].ingredient_name %></td>
+                            <td><%= ingredient[i].ingredient_quantity %></td>
+                            <td><%= ingredient[i].ingredient_price %></td>
+                            <td><%= ingredient[i].ingredient_quantity * ingredient[i].ingredient_price %></td>
+                            <td><%= ingredient[i].category_name %> </td>
+                            <td><%= ingredient[i].ingredient_desc %> </td>
                             <td>
-                                <a class="btn-small waves-effect waves-light blue" href=<%= "/list/edit/" + inventory[i].id %> ><i
+                                <a class="btn-small waves-effect waves-light blue" href=<%= "/list/edit/" + ingredient[i].inventory_id %> ><i
                                         class="material-icons right">edit</i>Info/Edit</a>
-                                <a class="btn-small waves-effect waves-light red" href="/list/edit/<%= inventory[i].id %>/delete"> <i
+                                <a class="btn-small waves-effect waves-light red" href="/list/edit/<%= ingredient[i].inventory_id %>/delete"> <i
                                         class="material-icons right">delete</i>Delete</a>
                             </td>
                         </tr>
@@ -131,13 +108,13 @@
 
             <div class="row">
                 <div class="input-field col s6">
-                    <select id="categoryInput" name="category" required>
-                        <option value="0" disabled selected>Choose your category</option>
-                        <% for (let i = 0; i < category.length; i++) { %>
-                            <option value=<%=category[i].categoryId %>><%= category[i].categoryName %></option>
+                    <select id="categoriesInput" name="categories" required>
+                        <option value="0" disabled selected>Choose your categories</option>
+                        <% for (let i = 0; i < categories.length; i++) { %>
+                            <option value=<%=categories[i].category_id %>><%= categories[i].category_name %></option>
                         <% } %>
                     </select>
-                    <label for="categoryInput">Category:</label>
+                    <label for="categoriesInput">Categories:</label>
                 </div>
             </div>
 

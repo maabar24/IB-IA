@@ -25,32 +25,7 @@
 <body>
 
     <header>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo">Maanav's Pizza Parlor</a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul id="desktop-nav" class="right hide-on-med-and-down">
-                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-                    <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
-                    <% if (isLoggedIn) { %>
-                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                        <li><a href="/logout" class="btn red">Logout</a></li>                        
-                    <% } else { %>
-                        <li><a href="/login" class="btn blue">Login</a></li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-        <ul id="mobile-nav" class="sidenav">
-             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-             <li><a href="/list"><i class="material-icons left">list</i>Inventory</a></li>
-             <% if (isLoggedIn) { %>
-                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                <li><a href="/logout" class="btn red">Logout</a></li>                        
-            <% } else { %>
-                <li><a href="/login" class="btn blue">Login</a></li>
-            <% } %>
-        </ul>
+        <%- include('partials/navbar') %>
     </header>
 
     <div class = "container">
@@ -72,18 +47,23 @@
                     <th>Price ($):</th>
                     <th>Quantity:</th>
                     <th>Total Assets:</th>
-                    <th>Category:</th>
+                    <th>Categories:</th>
                 </tr>   
             </thead>
 
-            <tbody>
+            <!-- Ask for Help Here-->
+            <tbody> 
+
+                <% for (let i = 0; i < ingredient.length; i++) { %>
                <tr>
-                    <td><%= item%></td>
-                    <td><%= price%></td>
-                    <td><%= quantity%></td>
-                    <td><%= quantity * price%></td>
-                    <td><%= categoryName %> </td>
+                    <td><%= ingredient[i].ingredient_name %></td>
+                    <td><%= ingredient[i].ingredient_price %></td>
+                    <td><%= ingredient[i].ingredient_quantity %></td>
+                    <td><%= ingredient[i].ingredient_quantity * ingredient[i].ingredient_price %></td>
+                    <td><%= ingredient[i].category_name %> </td>
                </tr>
+               <% } %>
+
             </tbody>
         </table>
         
@@ -94,14 +74,14 @@
                 <i class="material-icons right">edit</i>Edit</a>
 
     
-            <button class="btn-large waves-effect waves-light red right" href="/list/edit/<%=id %>/delete">
+            <button class="btn-large waves-effect waves-light red right" href="/list/edit/<%=inventory_id %>/delete">
                 <i class="material-icons right">delete</i>Delete</button>
         </div>
     
         <div class="modal" id="edit">
 
             <div class="modal-content">
-                <form method="post" action="/list/edit/<%= id%>">
+                <form method="post" action="/list/edit/<%= inventory_id%>">
                     <h2>Edit Inventory:</h2>
                     <div class="row">
                         <div class="input-field col s6">

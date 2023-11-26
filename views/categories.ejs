@@ -29,11 +29,11 @@
             <h1>Your Categories:</h1>
             <table>
                 <tbody>
-                    <% for (let i = 0; i < categoryList.length; i++) { %>
+                    <% for (let i = 0; i < categoriesList.length; i++) { %>
                     <tr>
-                        <td><%= categoryList[i].categoryName %></td>
+                        <td><%= categoriesList[i].category_name %></td>
                         <td>
-                            <a class="btn-small waves-effect waves-light red" href="/categories/<%= categoryList[i].categoryId %>/delete">
+                            <a class="btn-small waves-effect waves-light red" href="/categories/<%= categoriesList[i].category_id %>/delete">
                                 <i class="material-icons right">delete</i>
                                 Delete
                             </a>
@@ -44,13 +44,15 @@
             </table>
         </div>
 
+
         <div class="section" id="add">
             <h2>Add a Category:</h2>
-            <form id="addForm" method="post" action="/categories"> <!-- default action is the page's URL --> 
+            
+            <form method="post" action="/categories"> <!-- default action is the page's URL --> 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" id="categoryNameInput" name="categoryName" class="validate" data-length="32" required>
-                        <label for="categoryNameInput">Category name:</label>
+                        <input type="text" id="category_nameInput" name="category_name" class="validate" data-length="32" required>
+                        <label for="category_nameInput">Category Name:</label>
                     </div>
                 </div>
                 <button class="btn waves-effect waves-light" type="submit">
@@ -58,6 +60,7 @@
                     Submit
                 </button>
             </form>
+            
         </div>
     </div>
 
