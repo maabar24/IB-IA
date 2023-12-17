@@ -72,12 +72,7 @@
                         <td>
                             <a
                                 class="btn-small waves-effect waves-light blue"
-                                href="<%"
-                                ="/edit/"
-                                +
-                                ingredient[i].inventory_id
-                                %
-                            >
+                                href="/edit/<%= ingredient[i].inventory_id %>"
                                 ><i class="material-icons right">edit</i
                                 >Info/Edit</a
                             >
@@ -158,9 +153,9 @@
                             <option value="0" disabled selected>
                                 Choose your categories
                             </option>
-                            <% for (let i=0; i < categories.length; i++) { %>
-                            <option value="<%" ="categories[i].category_id" %>
-                                ><%= categories[i].category_name %>
+                            <% for (let i = 0; i < categories.length; i++) { %>
+                            <option value="<%= categories[i].category_id %>">
+                                <%= categories[i].category_name %>
                             </option>
                             <% } %>
                         </select>
