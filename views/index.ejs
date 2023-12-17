@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Inventory Manager</title>
-     <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pizza Inventory Manager</title>
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
 
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     
-     
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-             
-</head>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+    </head>
 
-<body>
+    <body>
+        <header><%- include('partials/navbar') %></header>
 
-    <header>
-        <%- include('partials/navbar') %>
-    </header>
-
-    <div class="container">
-        <% if (isLoggedIn) { %>
+        <div class="container">
+            <% if (isLoggedIn) { %>
             <h1>Welcome <%=user.name%>!</h1>
-        <% } else { %> 
+            <% } else { %>
             <a class="blue btn" href="/login">LOGIN</a>
             <h1>Welcome!</h1>
-        <% } %>
-        <h2>This website will help record inventory for Brunos's Pizza Parlor!</h2>
-        <a class = "waves-effect waves-light btn" href="/list">
-            Get Started!
-            <i class="material-icons right">arrow_forward</i>
-        </a>
+            <% } %>
+            <h2>
+                This website will help record inventory for Brunos's Pizza
+                Parlor!
+            </h2>
+            <a class="waves-effect waves-light btn" href="/list">
+                Get Started!
+                <i class="material-icons right">arrow_forward</i>
+            </a>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <img src="/images/Brunos_Logo.jpg" width="250" height="250">
-    </div> 
-</body>
+            <br />
+            <br />
+            <br />
+            <br />
+            <img src="/images/Brunos_Logo.png" width="250" height="250" />
+        </div>
+    </body>
 
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

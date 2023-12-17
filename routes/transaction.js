@@ -5,11 +5,11 @@ const fs = require("fs");
 const path = require("path");
 const { requiresAuth } = require("express-openid-connect");
 
-let categoriesRouter = express.Router();
+let transacationRouter = express.Router();
 
-const read_categories_all_sql = `
+const read_transaction_all_sql = `
     SELECT 
-        categories.category_id, category_name
+        .category_id, category_name
     FROM
         categories
 `;

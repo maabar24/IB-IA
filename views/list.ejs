@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Inventory Manager</title>
-    
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pizza Inventory Manager</title>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-   
-    <style>
-        .container{
-            margin: 2vw auto;
-        }
-    </style>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.dropdown-trigger');
-        var instances = M.Dropdown.init(elems, options);
-    });
-    </script>
-</head>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
 
-<body>
+        <style>
+            .container {
+                margin: 2vw auto;
+            }
+        </style>
 
-    <header>
-        <%- include('partials/navbar') %>
-    </header>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var elems = document.querySelectorAll(".dropdown-trigger");
+                var instances = M.Dropdown.init(elems, options);
+            });
+        </script>
+    </head>
 
-    <div class="container">
+    <body>
+        <header><%- include('partials/navbar') %></header>
+
+        <div class="container">
             <h1>List of Inventory</h1>
-            <a class="btn-small waves-effect waves-light green" href= "/categories"> <i
-                class="material-icons right">edit</i>Categories</a>
+            <a
+                class="btn-small waves-effect waves-light green"
+                href="/categories"
+            >
+                <i class="material-icons right">edit</i>Categories</a
+            >
             <table>
                 <thead>
                     <tr>
@@ -48,88 +54,130 @@
                         <th>Total Assets:</th>
                         <th>Categories:</th>
                         <th>Description:</th>
-                    </tr>   
+                    </tr>
                 </thead>
 
                 <tbody>
-                    
-                    <% for (let i = 0; i < ingredient.length; i++) { %>
-                        <tr>
-                            <td><%= ingredient[i].ingredient_name %></td>
-                            <td><%= ingredient[i].ingredient_quantity %></td>
-                            <td><%= ingredient[i].ingredient_price %></td>
-                            <td><%= ingredient[i].ingredient_quantity * ingredient[i].ingredient_price %></td>
-                            <td><%= ingredient[i].category_name %> </td>
-                            <td><%= ingredient[i].ingredient_desc %> </td>
-                            <td>
-                                <a class="btn-small waves-effect waves-light blue" href=<%= "/list/edit/" + ingredient[i].inventory_id %> ><i
-                                        class="material-icons right">edit</i>Info/Edit</a>
-                                <a class="btn-small waves-effect waves-light red" href="/list/edit/<%= ingredient[i].inventory_id %>/delete"> <i
-                                        class="material-icons right">delete</i>Delete</a>
-                            </td>
-                        </tr>
-                        <% } %>
-                    
+                    <% for (let i=0; i < ingredient.length; i++) { %>
+                    <tr>
+                        <td><%= ingredient[i].ingredient_name %></td>
+                        <td><%= ingredient[i].ingredient_quantity %></td>
+                        <td><%= ingredient[i].ingredient_price %></td>
+                        <td>
+                            <%= ingredient[i].ingredient_quantity *
+                            ingredient[i].ingredient_price %>
+                        </td>
+                        <td><%= ingredient[i].category_name %></td>
+                        <td><%= ingredient[i].ingredient_desc %></td>
+                        <td>
+                            <a
+                                class="btn-small waves-effect waves-light blue"
+                                href="<%"
+                                ="/edit/"
+                                +
+                                ingredient[i].inventory_id
+                                %
+                            >
+                                ><i class="material-icons right">edit</i
+                                >Info/Edit</a
+                            >
+                            <a
+                                class="btn-small waves-effect waves-light red"
+                                href="/edit/<%= ingredient[i].inventory_id %>/delete"
+                            >
+                                <i class="material-icons right">delete</i
+                                >Delete</a
+                            >
+                        </td>
+                    </tr>
+                    <% } %>
                 </tbody>
-            </table> 
-    
-            <br> 
-        
-        <form method="post" action="/list"> 
+            </table>
 
-            <h1>Add Inventory:</h1>
-            <div class="row">
-                <div class="input-field">
-                    <label for="nameInput">Item Name:</label>
-                    <input type="text" name="name" id="nameInput" class="validate" data-length="50" required>
-                </div>
-             </div>
-    
-            <div class="row">
-                <div class="input-field">
-                    <label for="priceInput">Price ($):</label>
-                    <input type="text" name="price" id="priceInput" class="validate" data-length="10" required>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="input-field">
-                    <label for="quantityInput">Item Quantity:</label>
-                    <input type="number" name="quantity" id="quantityInput" class="validate" value=118 required>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="input-field">
-                    <label for="descriptionInput">Item Description:</label>
-                    <input type="text" name="description" id="descriptionInput" data-length="150">
-                </div>
-            </div>
+            <br />
 
-            <div class="row">
-                <div class="input-field col s6">
-                    <select id="categoriesInput" name="categories" required>
-                        <option value="0" disabled selected>Choose your categories</option>
-                        <% for (let i = 0; i < categories.length; i++) { %>
-                            <option value=<%=categories[i].category_id %>><%= categories[i].category_name %></option>
-                        <% } %>
-                    </select>
-                    <label for="categoriesInput">Categories:</label>
+            <form method="post" action="/list">
+                <h1>Add Inventory:</h1>
+                <div class="row">
+                    <div class="input-field">
+                        <label for="nameInput">Item Name:</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="nameInput"
+                            class="validate"
+                            data-length="50"
+                            required
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <br>
-            <br>
-            
-            <button class="waves-effect waves-light btn orange">
-                <i class="material-icons right">add</i>
-                Add
-            </button>
+                <div class="row">
+                    <div class="input-field">
+                        <label for="priceInput">Price ($):</label>
+                        <input
+                            type="text"
+                            name="price"
+                            id="priceInput"
+                            class="validate"
+                            data-length="10"
+                            required
+                        />
+                    </div>
+                </div>
 
-            
-    </form>
-        
-    <script src="/scripts/autoInit.js"></script>
-</body>
+                <div class="row">
+                    <div class="input-field">
+                        <label for="quantityInput">Item Quantity:</label>
+                        <input
+                            type="number"
+                            name="quantity"
+                            id="quantityInput"
+                            class="validate"
+                            value="118"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field">
+                        <label for="descriptionInput">Item Description:</label>
+                        <input
+                            type="text"
+                            name="description"
+                            id="descriptionInput"
+                            data-length="150"
+                        />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="categoriesInput" name="categories" required>
+                            <option value="0" disabled selected>
+                                Choose your categories
+                            </option>
+                            <% for (let i=0; i < categories.length; i++) { %>
+                            <option value="<%" ="categories[i].category_id" %>
+                                ><%= categories[i].category_name %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label for="categoriesInput">Categories:</label>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <button class="waves-effect waves-light btn orange">
+                    <i class="material-icons right">add</i>
+                    Add
+                </button>
+            </form>
+        </div>
+
+        <script src="/scripts/autoInit.js"></script>
+    </body>
 </html>
-
