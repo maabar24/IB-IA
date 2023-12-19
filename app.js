@@ -73,12 +73,41 @@ app.get("/", (req, res) => {
     });
 });
 
+const read_ingredient_sql = `SELECT 
+    inventory_id, ingredient_name, ingredient_quantity, ingredient_price, category_name 
+FROM 
+    ingredient 
+JOIN 
+    categories 
+ON 
+    categories.category_id = ingredient.category_id 
+WHERE 
+    inventory_id = ?`;
+
 app.get("/edit/:inventory_id", (req, res) => {
+    console.log(
+        "Route /edit/:inventory_id accessed. Inventory ID:",
+        parseInt(req.params.inventory_id)
+    );
+    db.execute(
+        read_ingredient_sql,
+        [req.params.inventory_id],
+        (error, results) => {
+            if (error) {
+                res.status(500).send(error); //internal server error
+            } else if (results.length == 0) {
+                res.status(404).send(
+                    `No item found with id = "${parseInt(
+                        req.params.inventory_id
+                    )}"`
+                );
+            } else {
+                res.render("edit", { ingredient: results }); //results[0]
+            }
+        }
+    );
     //console.log(`${req.method} ${req.url}`);
-    res.render("edit", {
-        isLoggedIn: req.oidc.isAuthenticated(),
-        user: req.oidc.user,
-    });
+    //res.render("/views/edit.html", results[0]);
 });
 
 let listRouter = require("./routes/list.js");
