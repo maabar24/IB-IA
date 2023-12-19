@@ -145,24 +145,24 @@ SET
 WHERE
     inventory_id = ?`;
 
-listRouter.post("/edit/:inventory_id", (req, res) => {
-    db.execute(
-        update_ingredient_sql,
-        [
-            req.body.name,
-            req.body.quantity,
-            req.body.price,
-            req.body.categories,
-            req.params.inventory_id,
-            req.oidc.user.email,
-        ],
-        (error, results) => {
-            if (error) res.status(500).send(error); //Internal Server Error
-            else {
-                res.redirect(`/edit/${req.params.inventory_id}`);
-            }
-        }
-    );
-});
+// listRouter.post("/edit/:inventory_id", (req, res) => {
+//     db.execute(
+//         update_ingredient_sql,
+//         [
+//             req.body.name,
+//             req.body.quantity,
+//             req.body.price,
+//             req.body.categories,
+//             req.params.inventory_id,
+//             req.oidc.user.email,
+//         ],
+//         (error, results) => {
+//             if (error) res.status(500).send(error); //Internal Server Error
+//             else {
+//                 res.redirect(`/edit/${req.params.inventory_id}`);
+//             }
+//         }
+//     );
+// });
 
 module.exports = listRouter;

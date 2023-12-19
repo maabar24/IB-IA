@@ -90,7 +90,12 @@
 
             <div class="modal" id="edit">
                 <div class="modal-content">
-                    <form method="post" action="/list/edit/">
+                    <form method="post" action="/edit">
+                        <input
+                            type="hidden"
+                            name="inventory_id"
+                            value="<%= ingredient[0].inventory_id %>"
+                        />
                         <h2>Edit Inventory:</h2>
                         <div class="row">
                             <div class="input-field col s6">

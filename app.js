@@ -110,6 +110,39 @@ app.get("/edit/:inventory_id", (req, res) => {
     //res.render("/views/edit.html", results[0]);
 });
 
+const update_ingredient_sql = `
+UPDATE
+    ingredient
+SET
+    ingredient_name = ?,
+    ingredient_quantity = ?,
+    ingredient_price = ?,
+    ingredient_desc = ?
+WHERE
+    inventory_id = ?`;
+
+app.post("/edit", (req, res) => {
+    console.log("Using this one")
+    db.execute(
+        update_ingredient_sql,
+        [
+            req.body.name,
+            req.body.quantity,
+            req.body.price,
+            req.body.description,
+            parseInt(req.body.inventory_id)
+        ],
+        (error, results) => {
+            console.log(error)
+            if (error) res.status(500).send(error); //Internal Server Error
+            else {
+    
+                res.redirect(`/edit/${req.body.inventory_id}`);
+            }
+        }
+    );
+});
+
 let listRouter = require("./routes/list.js");
 app.use("/list", listRouter);
 app.use("/edit", listRouter);
