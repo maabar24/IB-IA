@@ -36,7 +36,7 @@ const create_categories_sql = `
 categoriesRouter.post("/", requiresAuth(), (req, res) => {
     db.execute(
         create_categories_sql,
-        [req.body.category_name, req.oidc.user.sub],
+        [req.body.category_name],
         (error, results) => {
             if (DEBUG) console.log(error ? error : results);
             if (error) res.status(500).send(error); //Internal Server Error
