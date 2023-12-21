@@ -197,12 +197,12 @@ app.post("/edit", (req, res) => {
 });
 
 app.get("/transactions", (req, res) => {
-    db.execute("select * from transactions", (error, results) => {
+    db.execute("select * from input_output", (error, results) => {
         if (error) {
             console.log(error);
         }
         console.log(results)
-        res.render("transaction", { transactions: results });
+        res.render("transaction", { inputOutputs: results });
     })
 });
 

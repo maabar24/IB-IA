@@ -42,21 +42,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Transaction ID</th>
                         <th>Input/Output ID</th>
-                        <th>Inventory ID</th>
-                        <th>Date</th>
-                        <th>Input/Output Quantity ID</th>
+                        <th>Type</th>
+                        <th>Quantity ID</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (let i = 0; i < transactions.length; i++) { %>
+                    <% for (let i = 0; i < inputOutputs.length; i++) { %>
                     <tr>
-                        <td><%= transactions[i].transaction_id %></td>
-                        <td><%= transactions[i].input_output_id %></td>
-                        <td><%= transactions[i].inventory_id %></td>
-                        <td><%= transactions[i].date %></td>
-                        <td><%= transactions[i].input_output_quantity_id %></td>
+                        <td><%= inputOutputs[i].input_output_id %></td>
+                        <td><%= inputOutputs[i].input_output %></td>
+                        <td><%= inputOutputs[i].input_output_quantity_id %></td>
+                        <td><%= inputOutputs[i].input_output_quantity %></td>
                     </tr>
                     <% } %>
                 </tbody>
