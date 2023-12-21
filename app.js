@@ -196,6 +196,16 @@ app.post("/edit", (req, res) => {
     );
 });
 
+app.get("/transactions", (req, res) => {
+    db.execute("select * from transactions", (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(results)
+        res.render("transaction", { transactions: results });
+    })
+});
+
 let listRouter = require("./routes/list.js");
 app.use("/list", listRouter);
 app.use("/edit", listRouter);
