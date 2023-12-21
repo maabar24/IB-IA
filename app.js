@@ -136,6 +136,35 @@ app.get("/edit/:inventory_id/delete", (req, res) => {
     //console.log(`${req.method} ${req.url}`);
     //res.render("/views/edit.html", results[0]);
 });
+
+const delete_category_sql = `
+DELETE 
+FROM
+    categories
+WHERE
+    category_id = ?`;
+
+app.get("/categories/:category_id/delete", (req, res) => {
+    db.execute(
+        delete_category_sql,
+        [req.params.category_id],
+        (error, results) => {
+            if (error) {
+                res.status(500).send(error); //internal server error
+            } else if (results.length == 0) {
+                res.status(404).send(
+                    `No category found with id = "${parseInt(
+                        req.params.category_id
+                    )}"`
+                );
+            } else {
+                res.redirect("/categories");
+            }
+        }
+    );
+    //console.log(`${req.method} ${req.url}`);
+    //res.render("/views/edit.html", results[0]);
+});
 const update_ingredient_sql = `
 UPDATE
     ingredient
