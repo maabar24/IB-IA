@@ -109,7 +109,33 @@ app.get("/edit/:inventory_id", (req, res) => {
     //console.log(`${req.method} ${req.url}`);
     //res.render("/views/edit.html", results[0]);
 });
+const delete_ingredient_sql = `
+DELETE FROM
+    ingredient
+WHERE
+    inventory_id = ?`;
 
+app.get("/edit/:inventory_id/delete", (req, res) => {
+    db.execute(
+        delete_ingredient_sql,
+        [req.params.inventory_id],
+        (error, results) => {
+            if (error) {
+                res.status(500).send(error); //internal server error
+            } else if (results.length == 0) {
+                res.status(404).send(
+                    `No item found with id = "${parseInt(
+                        req.params.inventory_id
+                    )}"`
+                );
+            } else {
+                res.redirect("/list");
+            }
+        }
+    );
+    //console.log(`${req.method} ${req.url}`);
+    //res.render("/views/edit.html", results[0]);
+});
 const update_ingredient_sql = `
 UPDATE
     ingredient
@@ -122,7 +148,6 @@ WHERE
     inventory_id = ?`;
 
 app.post("/edit", (req, res) => {
-    console.log("Using this one")
     db.execute(
         update_ingredient_sql,
         [
@@ -130,13 +155,12 @@ app.post("/edit", (req, res) => {
             req.body.quantity,
             req.body.price,
             req.body.description,
-            parseInt(req.body.inventory_id)
+            parseInt(req.body.inventory_id),
         ],
         (error, results) => {
-            console.log(error)
+            console.log(error);
             if (error) res.status(500).send(error); //Internal Server Error
             else {
-    
                 res.redirect(`/edit/${req.body.inventory_id}`);
             }
         }
